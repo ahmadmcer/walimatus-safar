@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+RO:wght@100..400&family=Ruwudu:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-handwriting: 'Playwrite RO', sans-serif;
+  --font-serif: 'PT Serif', serif;
+  --font-sans: 'PT Serif', sans-serif;
+  --font-arabic: 'Noto Naskh Arabic', sans-serif;
+  --font-arabic-ruwudu: 'Ruwudu', sans-serif;
+}

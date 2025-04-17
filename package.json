@@ -1,0 +1,28 @@
+{
+  "name": "walimatus-safar",
+  "version": "1.0.0",
+  "description": "Undangan Tasyakuran Walimatus Safar Lil Haji",
+  "main": "index.js",
+  "scripts": {
+    "tw:build": "npx @tailwindcss/cli -i ./css/style.css -o ./css/tailwind.css",
+    "tw:watch": "npx @tailwindcss/cli -i ./css/style.css -o ./css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmadmcer/walimatus-safar.git"
+  },
+  "author": "Ahmad Nawawi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ahmadmcer/walimatus-safar/issues"
+  },
+  "homepage": "https://github.com/ahmadmcer/walimatus-safar#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.4",
+    "tailwindcss": "^4.1.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  }
+}
