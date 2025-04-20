@@ -42,7 +42,7 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/47b2470024.js" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body class="overflow-hidden">
     <div id="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition duration-700">
       <i id="loading-icon" class="fas fa-spinner fa-spin fa-spin-pulse text-4xl text-slate-800"></i>
       <button
@@ -54,7 +54,7 @@
 
     <header
       id="open-cover"
-      class="fixed top-0 left-0 z-30 h-svh w-full overflow-hidden bg-cover bg-center bg-no-repeat"
+      class="fixed z-30 h-svh w-full overflow-hidden bg-cover bg-center bg-no-repeat"
       style="background-image: url('img/islamic_pattern.png')">
       <div class="flex h-full flex-col items-center justify-center bg-slate-200/80 p-16">
         <div class="text-center drop-shadow drop-shadow-black/30">
@@ -281,8 +281,19 @@
         forceCloseButton.classList.remove('hidden');
       }, loadingDuration);
 
+      forceCloseButton.addEventListener('click', () => {
+        clearTimeout(loadingTimeout);
+        loadingIcon.remove();
+        forceCloseButton.remove();
+        loading.classList.add('opacity-0');
+        setTimeout(() => {
+          loading.remove();
+        }, 700); // Match the duration of the opacity transition
+      });
+
       window.addEventListener('load', () => {
         loadingIcon.remove();
+        forceCloseButton.remove();
         loading.classList.add('opacity-0');
         setTimeout(() => {
           loading.remove();
@@ -316,22 +327,6 @@
       const countdownInterval = setInterval(updateCountdown, 1000);
       updateCountdown(); // Initial call to display countdown immediately
 
-      // Play background music on user interaction
-      const audio = new Audio('aud/labbaik.m4a');
-      audio.loop = true;
-      audio.volume = 0.5; // Set volume to 50%
-
-      const playAudioOnInteraction = () => {
-        audio.play().catch((error) => {
-          console.error('Error playing audio:', error);
-        });
-        document.removeEventListener('click', playAudioOnInteraction);
-        document.removeEventListener('keydown', playAudioOnInteraction);
-      };
-
-      document.addEventListener('click', playAudioOnInteraction);
-      document.addEventListener('keydown', playAudioOnInteraction);
-
       // Pause audio when the page is hidden
       document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
@@ -361,15 +356,27 @@
       const openCoverButton = document.getElementById('open-button');
       const openCoverSection = document.getElementById('open-cover');
       const mainSection = document.querySelector('main');
+      const body = document.querySelector('body');
       openCoverButton.addEventListener('click', () => {
         openCoverSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
+        body.classList.remove('overflow-hidden');
       });
 
       // Play video on open
       const video = document.getElementById('video');
       openCoverButton.addEventListener('click', () => {
         video.play();
+      });
+
+      // Play audio on open
+      const audio = new Audio('aud/labbaik.m4a');
+      audio.loop = true;
+      audio.volume = 0.5; // Set volume to 50%
+      openCoverButton.addEventListener('click', () => {
+        audio.play().catch((error) => {
+          console.error('Error playing audio:', error);
+        });
       });
     </script>
   </body>
