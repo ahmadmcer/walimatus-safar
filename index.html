@@ -45,6 +45,11 @@
   <body>
     <div id="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition duration-700">
       <i id="loading-icon" class="fas fa-spinner fa-spin fa-spin-pulse text-4xl text-slate-800"></i>
+      <button
+        id="force-close"
+        class="absolute bottom-8 hidden rounded-lg border-2 border-slate-800 bg-white px-4 py-2 text-sm text-slate-800 shadow-lg transition duration-300 hover:bg-slate-200 hover:text-slate-600 focus:outline-none">
+        klik ini jika loading terlalu lama
+      </button>
     </div>
 
     <header
@@ -269,6 +274,13 @@
       // Loading screen
       const loading = document.getElementById('loading');
       const loadingIcon = document.getElementById('loading-icon');
+      const forceCloseButton = document.getElementById('force-close');
+
+      const loadingDuration = 3000; // Duration in milliseconds
+      const loadingTimeout = setTimeout(() => {
+        forceCloseButton.classList.remove('hidden');
+      }, loadingDuration);
+
       window.addEventListener('load', () => {
         loadingIcon.remove();
         loading.classList.add('opacity-0');
