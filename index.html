@@ -43,6 +43,10 @@
     <script src="https://kit.fontawesome.com/47b2470024.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <div id="loading" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition duration-700">
+      <i id="loading-icon" class="fas fa-spinner fa-spin fa-spin-pulse text-4xl text-slate-800"></i>
+    </div>
+
     <header
       id="open-cover"
       class="fixed top-0 left-0 z-30 h-svh w-full overflow-hidden bg-cover bg-center bg-no-repeat"
@@ -62,19 +66,17 @@
       </div>
     </header>
 
-    <main class="hidden">
+    <main>
       <section id="landing" class="relative h-svh overflow-hidden">
         <div id="video-background" class="absolute inset-0 z-0 h-full w-full overflow-hidden">
           <div class="absolute inset-0 z-0 h-full w-full bg-gradient-to-b from-white/70 to-white/100"></div>
-          <video autoplay loop muted class="h-full w-full object-cover">
+          <video id="video" loop muted class="h-full w-full object-cover">
             <source src="vid/cinematic.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
 
         <div id="landing-page" class="relative z-10 flex h-full flex-col items-center justify-center">
-          <!-- <div>
-          </div> -->
           <div class="mb-24 px-8 text-center drop-shadow drop-shadow-black/30">
             <img src="img/kaaba.png" alt="Kaaba" class="mx-auto h-auto w-52" />
             <h3 class="font-handwriting font-bold">Undangan Tasyakuran</h3>
@@ -264,6 +266,17 @@
     </main>
 
     <script>
+      // Loading screen
+      const loading = document.getElementById('loading');
+      const loadingIcon = document.getElementById('loading-icon');
+      window.addEventListener('load', () => {
+        loadingIcon.remove();
+        loading.classList.add('opacity-0');
+        setTimeout(() => {
+          loading.remove();
+        }, 700); // Match the duration of the opacity transition
+      });
+
       // Countdown Timer
       const countdownDate = new Date('2025-04-26T13:00:00').getTime();
       const countdownElement = document.getElementById('countdown');
@@ -339,6 +352,12 @@
       openCoverButton.addEventListener('click', () => {
         openCoverSection.classList.add('hidden');
         mainSection.classList.remove('hidden');
+      });
+
+      // Play video on open
+      const video = document.getElementById('video');
+      openCoverButton.addEventListener('click', () => {
+        video.play();
       });
     </script>
   </body>
